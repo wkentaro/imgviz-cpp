@@ -70,8 +70,7 @@ cv::Mat normalize(cv::Mat src) {
   return normalize(src, min_val, max_val);
 }
 
-std::tuple<unsigned, unsigned> getTileShape(unsigned size,
-                                            double hw_ratio = 1) {
+cv::Vec2i getTileShape(unsigned size, double hw_ratio = 1) {
   unsigned rows = static_cast<unsigned>(round(sqrt(size / hw_ratio)));
   unsigned cols = 0;
   while (rows * cols < size) {
@@ -80,23 +79,22 @@ std::tuple<unsigned, unsigned> getTileShape(unsigned size,
   while ((rows - 1) * cols >= size) {
     rows--;
   }
-  return std::make_tuple(rows, cols);
+  return cv::Vec2i(rows, cols);
 }
 
 cv::Mat tile(const std::vector<cv::Mat> images,
-             std::tuple<unsigned, unsigned> shape = std::make_tuple(0, 0),
-             const unsigned border_width = 5,
+             cv::Vec2i shape = cv::Vec2i(0, 0), const unsigned border_width = 5,
              const cv::Scalar border_color = cv::Scalar(255, 255, 255)) {
   unsigned height = images[0].rows;
   unsigned width = images[0].cols;
 
-  if (std::get<0>(shape) * std::get<1>(shape) == 0) {
+  if (shape[0] * shape[1] == 0) {
     shape = getTileShape(/*size=*/images.size(),
                          /*hw_ratio=*/static_cast<double>(height) /
                              static_cast<double>(width));
   }
-  unsigned rows = std::get<0>(shape);
-  unsigned cols = std::get<1>(shape);
+  unsigned rows = shape[0];
+  unsigned cols = shape[1];
 
   cv::Mat dst;
   for (size_t j = 0; j < rows; j++) {
@@ -140,6 +138,40 @@ cv::Mat tile(const std::vector<cv::Mat> images,
       cv::vconcat(dst, dst_row, dst);
     }
   }
+
+  return dst;
+}
+
+cv::Mat textInRectangle(const cv::Mat src, const std::string text,
+                        const std::string loc,
+                        const int font_face = cv::FONT_HERSHEY_SIMPLEX,
+                        const double font_scale = 1, const int thickness = 2) {
+  assert(src.type() == CV_8UC3);
+
+  cv::Mat dst = src.clone();
+
+  int baseline;
+  cv::Size text_size =
+      cv::getTextSize(text, font_face, font_scale, thickness, &baseline);
+  baseline += thickness;
+
+  cv::Point text_org = cv::Point(0, text_size.height + thickness);
+
+  cv::Point aabb1 = text_org + cv::Point(0, baseline - thickness);
+  cv::Point aabb2 =
+      text_org + cv::Point(text_size.width, -text_size.height - thickness);
+
+  cv::Mat extender = cv::Mat::zeros(aabb1.y - aabb2.y + 1, src.cols, CV_8UC3);
+  extender.setTo(255);
+  cv::vconcat(extender, dst, dst);
+
+  cv::rectangle(dst, aabb1, aabb2,
+                /*color=*/cv::Scalar(255, 255, 255),
+                /*thickness=*/cv::FILLED);
+  cv::putText(dst, text, /*org=*/text_org,
+              /*fontFace=*/font_face,
+              /*fontScale=*/font_scale, /*color=*/cv::Scalar(0, 0, 0),
+              /*thickness=*/thickness);
 
   return dst;
 }

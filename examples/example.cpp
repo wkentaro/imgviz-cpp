@@ -27,9 +27,12 @@ int main(int argc, char **argv) {
   cv::applyColorMap(depth_gray, depth_bgr, cv::COLORMAP_JET);
   depth_bgr.setTo(0, ~isfinite(depth));
 
-  std::vector<cv::Mat> images = {bgr, depth_gray, depth_bgr};
-  cv::Mat tiled = tile(images, /*shape=*/std::make_tuple(1, 3));
+  bgr = textInRectangle(bgr, "bgr", "lt");
+  depth_bgr = textInRectangle(depth_bgr, "depth_bgr", "lt");
 
-  cv::imshow("bgr, depth_gray, depth_bgr", tiled);
+  std::vector<cv::Mat> images = {bgr, depth_bgr};
+  cv::Mat tiled = tile(images, /*shape=*/cv::Vec2i(1, 2));
+
+  cv::imshow("example", tiled);
   cv::waitKey(0);
 }
