@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+project(imgviz)
+
+find_package(OpenCV REQUIRED)
+
+include_directories(${OpenCV_INCLUDE_DIRS} include)
+link_directories(${OpenCV_LIBRARY_DIRS})
+add_definitions(${OpenCV_DEFINITIONS})
+
+add_executable(example examples/example.cpp)
+target_link_libraries(example ${OpenCV_LIBRARIES})
