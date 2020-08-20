@@ -160,9 +160,11 @@ cv::Mat textInRectangle(const cv::Mat src, const std::string text,
                         const std::string loc,
                         const int font_face = cv::FONT_HERSHEY_SIMPLEX,
                         const double font_scale = 1, const int thickness = 2) {
-  assert(src.type() == CV_8UC3);
-
   cv::Mat dst = src.clone();
+  if (dst.type() == CV_8UC1) {
+    cv::cvtColor(dst, dst, cv::COLOR_GRAY2BGR);
+  }
+  assert(dst.type() == CV_8UC3);
 
   int baseline;
   cv::Size text_size =

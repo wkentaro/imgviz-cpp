@@ -7,5 +7,5 @@ include_directories(${OpenCV_INCLUDE_DIRS} include)
 link_directories(${OpenCV_LIBRARY_DIRS})
 add_definitions(${OpenCV_DEFINITIONS})
 
-add_executable(example examples/example.cpp)
-target_link_libraries(example ${OpenCV_LIBRARIES})
+add_executable(depth_to_bgr examples/depth_to_bgr.cpp)
+target_link_libraries(depth_to_bgr ${OpenCV_LIBRARIES})
