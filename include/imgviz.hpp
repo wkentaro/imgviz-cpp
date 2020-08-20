@@ -70,6 +70,20 @@ cv::Mat normalize(cv::Mat src) {
   return normalize(src, min_val, max_val);
 }
 
+cv::Mat depthToBgr(cv::Mat depth, double min_val, double max_val) {
+  assert(depth.type() == CV_32FC1);
+
+  cv::Mat depth_bgr;
+  depth_bgr = normalize(depth, min_val, max_val);
+  depth_bgr = depth_bgr * 255;
+  depth_bgr.convertTo(depth_bgr, CV_8UC1);
+
+  cv::applyColorMap(depth_bgr, depth_bgr, cv::COLORMAP_JET);
+  depth_bgr.setTo(0, ~isfinite(depth));
+
+  return depth_bgr;
+}
+
 cv::Vec2i getTileShape(unsigned size, double hw_ratio = 1) {
   unsigned rows = static_cast<unsigned>(round(sqrt(size / hw_ratio)));
   unsigned cols = 0;
