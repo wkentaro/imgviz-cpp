@@ -2,6 +2,8 @@
 
 #include <opencv2/opencv.hpp>
 
+namespace imgviz {
+
 cv::Mat isfinite(cv::Mat mat) { return mat == mat; }
 
 std::string typeToStr(int type) {
@@ -84,18 +86,6 @@ cv::Mat depthToBgr(cv::Mat depth, double min_val, double max_val) {
   return depth_bgr;
 }
 
-cv::Vec2i getTileShape(unsigned size, double hw_ratio = 1) {
-  unsigned rows = static_cast<unsigned>(round(sqrt(size / hw_ratio)));
-  unsigned cols = 0;
-  while (rows * cols < size) {
-    cols++;
-  }
-  while ((rows - 1) * cols >= size) {
-    rows--;
-  }
-  return cv::Vec2i(rows, cols);
-}
-
 cv::Mat centerize(const cv::Mat &src, const cv::Size &size) {
   if (src.size() == size) {
     return src;
@@ -119,6 +109,18 @@ cv::Mat centerize(const cv::Mat &src, const cv::Size &size) {
   src_resized.copyTo(dst(roi));
 
   return dst;
+}
+
+cv::Vec2i getTileShape(unsigned size, double hw_ratio = 1) {
+  unsigned rows = static_cast<unsigned>(round(sqrt(size / hw_ratio)));
+  unsigned cols = 0;
+  while (rows * cols < size) {
+    cols++;
+  }
+  while ((rows - 1) * cols >= size) {
+    rows--;
+  }
+  return cv::Vec2i(rows, cols);
 }
 
 cv::Mat tile(const std::vector<cv::Mat> images,
@@ -223,3 +225,5 @@ cv::Mat textInRectangle(const cv::Mat src, const std::string text,
 
   return dst;
 }
+
+} // namespace imgviz

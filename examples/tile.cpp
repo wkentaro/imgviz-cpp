@@ -27,17 +27,17 @@ int main(int argc, char **argv) {
   cv::Mat luv;
   cv::cvtColor(bgr, luv, cv::COLOR_BGR2Luv);
 
-  bgr = textInRectangle(bgr, "bgr", "lt");
-  gray = textInRectangle(gray, "gray", "lt");
-  edges = textInRectangle(edges, "edges", "lt");
-  hsv = textInRectangle(hsv, "hsv", "lt");
-  xyz = textInRectangle(xyz, "xyz", "lt");
-  yuv = textInRectangle(yuv, "yuv", "lt");
-  lab = textInRectangle(lab, "lab", "lt");
-  luv = textInRectangle(luv, "luv", "lt");
+  bgr = imgviz::textInRectangle(bgr, "bgr", "lt");
+  gray = imgviz::textInRectangle(gray, "gray", "lt");
+  edges = imgviz::textInRectangle(edges, "edges", "lt");
+  hsv = imgviz::textInRectangle(hsv, "hsv", "lt");
+  xyz = imgviz::textInRectangle(xyz, "xyz", "lt");
+  yuv = imgviz::textInRectangle(yuv, "yuv", "lt");
+  lab = imgviz::textInRectangle(lab, "lab", "lt");
+  luv = imgviz::textInRectangle(luv, "luv", "lt");
 
   std::vector<cv::Mat> images = {bgr, gray, edges, hsv, xyz, yuv, lab, luv};
-  cv::Mat viz = tile(images, /*shape=*/cv::Vec2i(2, 4));
+  cv::Mat viz = imgviz::tile(images, /*shape=*/cv::Vec2i(2, 4));
 
   cv::imwrite("tile.png", viz);
   cv::imshow(argv[0], viz);

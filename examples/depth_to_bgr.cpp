@@ -13,19 +13,20 @@ int main(int argc, char **argv) {
   depth.setTo(NAN, depth == 0);
   depth /= 1000;
 
-  cv::Mat depth_normalized = normalize(depth, /*min_val=*/0.3, /*max_val=*/1);
+  cv::Mat depth_normalized =
+      imgviz::normalize(depth, /*min_val=*/0.3, /*max_val=*/1);
   depth_normalized *= 255;
   depth_normalized.convertTo(depth_normalized, CV_8UC1);
 
-  cv::Mat depth_bgr = depthToBgr(depth, /*min_val=*/0.3, /*max_val=*/1);
+  cv::Mat depth_bgr = imgviz::depthToBgr(depth, /*min_val=*/0.3, /*max_val=*/1);
 
-  bgr = textInRectangle(bgr, "bgr", "lt");
+  bgr = imgviz::textInRectangle(bgr, "bgr", "lt");
   depth_normalized =
-      textInRectangle(depth_normalized, "depth_normalized", "lt");
-  depth_bgr = textInRectangle(depth_bgr, "depth_bgr", "lt");
+      imgviz::textInRectangle(depth_normalized, "depth_normalized", "lt");
+  depth_bgr = imgviz::textInRectangle(depth_bgr, "depth_bgr", "lt");
 
   std::vector<cv::Mat> images = {bgr, depth_normalized, depth_bgr};
-  cv::Mat viz = tile(images, /*shape=*/cv::Vec2i(1, 3));
+  cv::Mat viz = imgviz::tile(images, /*shape=*/cv::Vec2i(1, 3));
 
   cv::imwrite("depth_to_bgr.png", viz);
   cv::imshow(argv[0], viz);
