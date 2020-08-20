@@ -13,15 +13,18 @@
 </div>
 
 <div align="center">
-  <img src=".readme/getting_started.png" height="150px">
-</div>
-
-<div align="center">
-  <a href="#usage"><b>Usage</b></a> |
+  <a href="#installation"><b>Installation</b></a> |
+  <a href="examples/getting_started.cpp"><b>Getting Started</b></a> |
   <a href="#examples"><b>Examples</b></a>
 </div>
 
-## Usage
+<br/>
+
+<div align="center">
+  <img src=".readme/getting_started.png" height="100px">
+</div>
+
+## Installation
 
 1. Copy [`include/imgviz.hpp`](include/imgviz.hpp) to
   your project's `include` directory.
