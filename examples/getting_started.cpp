@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 
   bgr = imgviz::textInRectangle(bgr, "bgr");
   depth_normalized =
-      imgviz::textInRectangle(depth_normalized, "depth_normalized", "lt");
+      imgviz::textInRectangle(depth_normalized, "depth_normalized");
   depth_bgr = imgviz::textInRectangle(depth_bgr, "depth");
   class_label_bgr = imgviz::textInRectangle(class_label_bgr, "class_label");
 

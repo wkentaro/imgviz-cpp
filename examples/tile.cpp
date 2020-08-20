@@ -27,14 +27,14 @@ int main(int argc, char **argv) {
   cv::Mat luv;
   cv::cvtColor(bgr, luv, cv::COLOR_BGR2Luv);
 
-  bgr = imgviz::textInRectangle(bgr, "bgr", "lt");
-  gray = imgviz::textInRectangle(gray, "gray", "lt");
-  edges = imgviz::textInRectangle(edges, "edges", "lt");
-  hsv = imgviz::textInRectangle(hsv, "hsv", "lt");
-  xyz = imgviz::textInRectangle(xyz, "xyz", "lt");
-  yuv = imgviz::textInRectangle(yuv, "yuv", "lt");
-  lab = imgviz::textInRectangle(lab, "lab", "lt");
-  luv = imgviz::textInRectangle(luv, "luv", "lt");
+  bgr = imgviz::textInRectangle(bgr, "bgr");
+  gray = imgviz::textInRectangle(gray, "gray");
+  edges = imgviz::textInRectangle(edges, "edges");
+  hsv = imgviz::textInRectangle(hsv, "hsv");
+  xyz = imgviz::textInRectangle(xyz, "xyz");
+  yuv = imgviz::textInRectangle(yuv, "yuv");
+  lab = imgviz::textInRectangle(lab, "lab");
+  luv = imgviz::textInRectangle(luv, "luv");
 
   std::vector<cv::Mat> images = {bgr, gray, edges, hsv, xyz, yuv, lab, luv};
   cv::Mat viz = imgviz::tile(images, /*shape=*/cv::Vec2i(2, 4));

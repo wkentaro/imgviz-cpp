@@ -11,8 +11,8 @@ int main(int argc, char **argv) {
 
   bgr90 = imgviz::centerize(bgr90, bgr.size());
 
-  bgr = imgviz::textInRectangle(bgr, "original", "lt");
-  bgr90 = imgviz::textInRectangle(bgr90, "centerize", "lt");
+  bgr = imgviz::textInRectangle(bgr, "original");
+  bgr90 = imgviz::textInRectangle(bgr90, "centerize");
 
   std::vector<cv::Mat> images = {bgr, bgr90};
   cv::Mat viz = imgviz::tile(images, /*shape=*/cv::Vec2i(1, 2));

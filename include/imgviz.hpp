@@ -191,9 +191,11 @@ cv::Mat tile(const std::vector<cv::Mat> images,
 }
 
 cv::Mat textInRectangle(const cv::Mat src, const std::string text,
-                        const std::string loc = "lt+",
+                        const std::string loc = "lt",
                         const int font_face = cv::FONT_HERSHEY_SIMPLEX,
                         const double font_scale = 1, const int thickness = 2) {
+  assert(loc == "lt");  // TODO(wkentaro): support other loc
+
   cv::Mat dst = src.clone();
   if (dst.type() == CV_8UC1) {
     cv::cvtColor(dst, dst, cv::COLOR_GRAY2BGR);
