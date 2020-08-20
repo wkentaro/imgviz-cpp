@@ -35,7 +35,7 @@ cd build
 cmake ..
 make -j
 
-./getting_started ../examples/data
+./getting_started ../data
 ```
 
 <table>
