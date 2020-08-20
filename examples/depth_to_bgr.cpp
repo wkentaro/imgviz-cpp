@@ -18,10 +18,10 @@ int main(int argc, char **argv) {
 
   cv::Mat depth_bgr = imgviz::depthToBgr(depth, /*min_val=*/0.3, /*max_val=*/1);
 
-  bgr = imgviz::textInRectangle(bgr, "bgr", "lt");
+  bgr = imgviz::textInRectangle(bgr, "bgr");
   depth_normalized =
-      imgviz::textInRectangle(depth_normalized, "depth_normalized", "lt");
-  depth_bgr = imgviz::textInRectangle(depth_bgr, "depth_bgr", "lt");
+      imgviz::textInRectangle(depth_normalized, "depth_normalized");
+  depth_bgr = imgviz::textInRectangle(depth_bgr, "depth_bgr");
 
   std::vector<cv::Mat> images = {bgr, depth_normalized, depth_bgr};
   cv::Mat viz = imgviz::tile(images, /*shape=*/cv::Vec2i(1, 3));

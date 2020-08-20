@@ -191,10 +191,10 @@ cv::Mat tile(const std::vector<cv::Mat> images,
 }
 
 cv::Mat textInRectangle(const cv::Mat src, const std::string text,
-                        const std::string loc = "lt",
+                        const std::string loc = "lt+",
                         const int font_face = cv::FONT_HERSHEY_SIMPLEX,
                         const double font_scale = 1, const int thickness = 2) {
-  assert(loc == "lt");  // TODO(wkentaro): support other loc
+  assert(loc == "lt+");  // TODO(wkentaro): support other loc
 
   cv::Mat dst = src.clone();
   if (dst.type() == CV_8UC1) {
@@ -207,13 +207,13 @@ cv::Mat textInRectangle(const cv::Mat src, const std::string text,
       cv::getTextSize(text, font_face, font_scale, thickness, &baseline);
   baseline += thickness;
 
-  cv::Point text_org = cv::Point(0, text_size.height + thickness);
+  cv::Point text_org = cv::Point(0, text_size.height + thickness * 2);
 
-  cv::Point aabb1 = text_org + cv::Point(0, baseline - thickness);
+  cv::Point aabb1 = text_org + cv::Point(0, baseline - thickness * 2);
   cv::Point aabb2 =
-      text_org + cv::Point(text_size.width, -text_size.height - thickness);
+      text_org + cv::Point(text_size.width, -text_size.height - thickness * 2);
 
-  cv::Mat extender = cv::Mat::zeros(aabb1.y - aabb2.y + 1, src.cols, CV_8UC3);
+  cv::Mat extender = cv::Mat::zeros(aabb1.y - aabb2.y, src.cols, CV_8UC3);
   extender.setTo(255);
   cv::vconcat(extender, dst, dst);
 
@@ -245,7 +245,7 @@ cv::Vec3b getLabelColor(const uint8_t label) {
 
 cv::Mat labelToBgr(const cv::Mat label, const cv::Mat bgr,
                    const double alpha = 0.5) {
-  cv::Mat bgr_;
+  cv::Mat bgr_ = bgr.clone();
   if (bgr.type() == CV_8UC1) {
     cv::cvtColor(bgr, bgr_, cv::COLOR_GRAY2BGR);
   }
