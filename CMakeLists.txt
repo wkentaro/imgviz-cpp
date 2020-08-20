@@ -15,3 +15,6 @@ target_link_libraries(centerize ${OpenCV_LIBRARIES})
 
 add_executable(tile examples/tile.cpp)
 target_link_libraries(tile ${OpenCV_LIBRARIES})
+
+add_executable(label_to_bgr examples/label_to_bgr.cpp)
+target_link_libraries(label_to_bgr ${OpenCV_LIBRARIES})

@@ -35,6 +35,22 @@ make -j
 <table>
   <tr>
     <td>
+      <a href="examples/label_to_bgr.cpp">
+        <code>examples/label_to_bgr.cpp</code>
+      </a>
+    </td>
+    <td><img src=".readme/label_to_bgr.png" height="150px"></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="examples/depth_to_bgr.cpp">
+        <code>examples/depth_to_bgr.cpp</code>
+      </a>
+    </td>
+    <td><img src=".readme/depth_to_bgr.png" height="150px"></td>
+  </tr>
+  <tr>
+    <td>
       <a href="examples/tile.cpp">
         <code>examples/tile.cpp</code>
       </a>
@@ -48,13 +64,5 @@ make -j
       </a>
     </td>
     <td><img src=".readme/centerize.png" height="150px"></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="examples/depth_to_bgr.cpp">
-        <code>examples/depth_to_bgr.cpp</code>
-      </a>
-    </td>
-    <td><img src=".readme/depth_to_bgr.png" height="150px"></td>
   </tr>
 </table>

@@ -226,4 +226,42 @@ cv::Mat textInRectangle(const cv::Mat src, const std::string text,
   return dst;
 }
 
+cv::Vec3b getLabelColor(const uint8_t label) {
+  // VOC label colormap
+  uint8_t id = label;
+  uint8_t r = 0;
+  uint8_t g = 0;
+  uint8_t b = 0;
+  for (size_t i = 0; i < 8; ++i) {
+    r |= ((id & (1 << 0)) != 0) << (7 - i);
+    g |= ((id & (1 << 1)) != 0) << (7 - i);
+    b |= ((id & (1 << 2)) != 0) << (7 - i);
+    id = id >> 3;
+  }
+  return cv::Vec3b(b, g, r);
+}
+
+cv::Mat labelToBgr(const cv::Mat label, const cv::Mat bgr,
+                   const double alpha = 0.5) {
+  cv::Mat bgr_;
+  if (bgr.type() == CV_8UC1) {
+    cv::cvtColor(bgr, bgr_, cv::COLOR_GRAY2BGR);
+  }
+
+  assert(label.type() == CV_32SC1);
+  assert(bgr_.type() == CV_8UC3);
+
+  cv::Mat label_bgr = cv::Mat::zeros(label.size(), CV_8UC3);
+
+  for (size_t j = 0; j < label.rows; j++) {
+    for (size_t i = 0; i < label.cols; i++) {
+      cv::Vec3b bgr_color = bgr_.at<cv::Vec3b>(j, i);
+      cv::Vec3b label_color = getLabelColor(label.at<int32_t>(j, i) % 256);
+      label_bgr.at<cv::Vec3b>(j, i) =
+          alpha * label_color + (1 - alpha) * bgr_color;
+    }
+  }
+  return label_bgr;
+}
+
 } // namespace imgviz
