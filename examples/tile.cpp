@@ -40,6 +40,8 @@ int main(int argc, char **argv) {
   cv::Mat viz = imgviz::tile(images, /*shape=*/cv::Vec2i(2, 4));
 
   cv::imwrite("tile.png", viz);
-  cv::imshow(argv[0], viz);
-  cv::waitKey(0);
+  if (!std::getenv("CI")) {
+    cv::imshow(argv[0], viz);
+    cv::waitKey(0);
+  }
 }
