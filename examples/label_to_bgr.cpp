@@ -19,6 +19,8 @@ int main(int argc, char **argv) {
   cv::Mat viz = imgviz::tile({bgr, class_label_bgr}, cv::Vec2i(1, 2));
 
   cv::imwrite("label_to_bgr.png", viz);
-  cv::imshow("label_to_bgr", viz);
-  cv::waitKey(0);
+  if (!std::getenv("CI")) {
+    cv::imshow(argv[0], viz);
+    cv::waitKey(0);
+  }
 }

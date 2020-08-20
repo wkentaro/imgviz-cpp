@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        submodules: true
+    - name: Install dependencies
+      run: |
+        sudo apt-get install libopencv-dev cmake build-essential
+    - name: Build examples
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make -j
+    - name: Run examples
+      run: |
+        cd build
+        for f in ../examples/*.cpp; do
+          f=$(basename $f)
+          f=${f/.cpp/}
+          ./$f ../data
+        done

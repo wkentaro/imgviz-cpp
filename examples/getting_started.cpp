@@ -35,6 +35,8 @@ int main(int argc, char **argv) {
       {bgr, depth_normalized, depth_bgr, class_label_bgr}, cv::Vec2i(1, 4));
 
   cv::imwrite("getting_started.png", viz);
-  cv::imshow("getting_started", viz);
-  cv::waitKey(0);
+  if (!std::getenv("CI")) {
+    cv::imshow(argv[0], viz);
+    cv::waitKey(0);
+  }
 }

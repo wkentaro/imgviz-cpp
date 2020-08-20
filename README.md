@@ -1,7 +1,24 @@
-# imgviz-cpp
+<h1 align="center">
+  imgviz-cpp
+</h1>
+
+<h4 align="center">
+  Image Visualization Tools for C++
+</h4>
+
+<div align="center">
+  <a href="https://github.com/wkentaro/imgviz-cpp/actions">
+    <img src="https://github.com/wkentaro/imgviz-cpp/workflows/ci/badge.svg">
+  </a>
+</div>
 
 <div align="center">
   <img src=".readme/getting_started.png" height="150px">
+</div>
+
+<div align="center">
+  <a href="#usage"><b>Usage</b></a> |
+  <a href="#examples"><b>Examples</b></a>
 </div>
 
 ## Usage
