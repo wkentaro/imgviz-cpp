@@ -191,3 +191,24 @@ cv::Mat textInRectangle(const cv::Mat src, const std::string text,
 
   return dst;
 }
+
+cv::Mat centerize(const cv::Mat &src, const cv::Size &size) {
+  cv::Mat dst = cv::Mat::zeros(size, src.type());
+
+  unsigned height = src.rows;
+  unsigned width = src.cols;
+  double scale = fmin(static_cast<double>(size.height) / height,
+                      static_cast<double>(size.width) / width);
+
+  cv::Mat src_resized;
+  cv::resize(src, src_resized, cv::Size(0, 0), /*fx=*/scale, /*fy=*/scale);
+
+  cv::Size size_resized = src_resized.size();
+  cv::Point pt1 = cv::Point((size.width - size_resized.width) / 2,
+                            (size.height - size_resized.height) / 2);
+  cv::Point pt2 = pt1 + cv::Point(size_resized.width, size_resized.height);
+  cv::Rect roi = cv::Rect(pt1, pt2);
+  src_resized.copyTo(dst(roi));
+
+  return dst;
+}

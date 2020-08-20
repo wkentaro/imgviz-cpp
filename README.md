@@ -35,10 +35,18 @@ make -j
 <table>
   <tr>
     <td>
+      <a href="examples/centerize.cpp">
+        <code>examples/centerize.cpp</code>
+      </a>
+    </td>
+    <td><img src=".readme/centerize.png" height="150px"></td>
+  </tr>
+  <tr>
+    <td>
       <a href="examples/depth_to_bgr.cpp">
         <code>examples/depth_to_bgr.cpp</code>
       </a>
     </td>
-    <td><img src=".readme/depth_to_bgr.png"></td>
+    <td><img src=".readme/depth_to_bgr.png" height="150px"></td>
   </tr>
 </table>
