@@ -1,5 +1,3 @@
-#include <opencv2/opencv.hpp>
-
 #include "imgviz.hpp"
 
 int main(int argc, char **argv) {
