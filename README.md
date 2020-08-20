@@ -35,6 +35,14 @@ make -j
 <table>
   <tr>
     <td>
+      <a href="examples/tile.cpp">
+        <code>examples/tile.cpp</code>
+      </a>
+    </td>
+    <td><img src=".readme/tile.png" height="150px"></td>
+  </tr>
+  <tr>
+    <td>
       <a href="examples/centerize.cpp">
         <code>examples/centerize.cpp</code>
       </a>
