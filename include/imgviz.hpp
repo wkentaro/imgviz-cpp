@@ -96,11 +96,44 @@ cv::Vec2i getTileShape(unsigned size, double hw_ratio = 1) {
   return cv::Vec2i(rows, cols);
 }
 
+cv::Mat centerize(const cv::Mat &src, const cv::Size &size) {
+  if (src.size() == size) {
+    return src;
+  }
+
+  cv::Mat dst = cv::Mat::zeros(size, src.type());
+
+  unsigned height = src.rows;
+  unsigned width = src.cols;
+  double scale = fmin(static_cast<double>(size.height) / height,
+                      static_cast<double>(size.width) / width);
+
+  cv::Mat src_resized;
+  cv::resize(src, src_resized, cv::Size(0, 0), /*fx=*/scale, /*fy=*/scale);
+
+  cv::Size size_resized = src_resized.size();
+  cv::Point pt1 = cv::Point((size.width - size_resized.width) / 2,
+                            (size.height - size_resized.height) / 2);
+  cv::Point pt2 = pt1 + cv::Point(size_resized.width, size_resized.height);
+  cv::Rect roi = cv::Rect(pt1, pt2);
+  src_resized.copyTo(dst(roi));
+
+  return dst;
+}
+
 cv::Mat tile(const std::vector<cv::Mat> images,
              cv::Vec2i shape = cv::Vec2i(0, 0), const unsigned border_width = 5,
              const cv::Scalar border_color = cv::Scalar(255, 255, 255)) {
   unsigned height = images[0].rows;
   unsigned width = images[0].cols;
+  for (size_t i = 1; i < images.size(); i++) {
+    if (images[i].rows > height) {
+      height = images[i].rows;
+    }
+    if (images[i].cols > width) {
+      width = images[i].cols;
+    }
+  }
 
   if (shape[0] * shape[1] == 0) {
     shape = getTileShape(/*size=*/images.size(),
@@ -119,8 +152,7 @@ cv::Mat tile(const std::vector<cv::Mat> images,
       cv::Mat image;
       if (index < images.size()) {
         image = images[index];
-        assert(image.rows == height);
-        assert(image.cols == width);
+        image = centerize(image, cv::Size(width, height));
       } else {
         image = cv::Mat::zeros(height, width, images[0].type());
       }
@@ -188,27 +220,6 @@ cv::Mat textInRectangle(const cv::Mat src, const std::string text,
               /*fontFace=*/font_face,
               /*fontScale=*/font_scale, /*color=*/cv::Scalar(0, 0, 0),
               /*thickness=*/thickness);
-
-  return dst;
-}
-
-cv::Mat centerize(const cv::Mat &src, const cv::Size &size) {
-  cv::Mat dst = cv::Mat::zeros(size, src.type());
-
-  unsigned height = src.rows;
-  unsigned width = src.cols;
-  double scale = fmin(static_cast<double>(size.height) / height,
-                      static_cast<double>(size.width) / width);
-
-  cv::Mat src_resized;
-  cv::resize(src, src_resized, cv::Size(0, 0), /*fx=*/scale, /*fy=*/scale);
-
-  cv::Size size_resized = src_resized.size();
-  cv::Point pt1 = cv::Point((size.width - size_resized.width) / 2,
-                            (size.height - size_resized.height) / 2);
-  cv::Point pt2 = pt1 + cv::Point(size_resized.width, size_resized.height);
-  cv::Rect roi = cv::Rect(pt1, pt2);
-  src_resized.copyTo(dst(roi));
 
   return dst;
 }
