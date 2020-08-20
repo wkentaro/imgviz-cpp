@@ -191,7 +191,7 @@ cv::Mat tile(const std::vector<cv::Mat> images,
 }
 
 cv::Mat textInRectangle(const cv::Mat src, const std::string text,
-                        const std::string loc,
+                        const std::string loc = "lt+",
                         const int font_face = cv::FONT_HERSHEY_SIMPLEX,
                         const double font_scale = 1, const int thickness = 2) {
   cv::Mat dst = src.clone();
