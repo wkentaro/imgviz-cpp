@@ -1,5 +1,9 @@
 # imgviz-cpp
 
+<div align="center">
+  <img src=".readme/teaser.png" height="150px">
+</div>
+
 ## Usage
 
 1. Copy [`include/imgviz.hpp`](include/imgviz.hpp) to
