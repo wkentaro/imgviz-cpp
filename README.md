@@ -1,7 +1,7 @@
 # imgviz-cpp
 
 <div align="center">
-  <img src=".readme/teaser.png" height="150px">
+  <img src=".readme/getting_started.png" height="150px">
 </div>
 
 ## Usage
@@ -9,6 +9,8 @@
 1. Copy [`include/imgviz.hpp`](include/imgviz.hpp) to
   your project's `include` directory.
 1. Add below to your `CMakeLists.txt`.
+1. Refer to [`examples/getting_started.cpp`](examples/getting_started.cpp)
+   and [examples](#examples) to see how to use this library.
 
 ```cmake
 find_package(OpenCV REQUIRED)
@@ -33,7 +35,7 @@ cd build
 cmake ..
 make -j
 
-./depth_to_bgr ../examples/data
+./getting_started ../examples/data
 ```
 
 <table>

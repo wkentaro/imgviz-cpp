@@ -18,3 +18,6 @@ target_link_libraries(tile ${OpenCV_LIBRARIES})
 
 add_executable(label_to_bgr examples/label_to_bgr.cpp)
 target_link_libraries(label_to_bgr ${OpenCV_LIBRARIES})
+
+add_executable(getting_started examples/getting_started.cpp)
+target_link_libraries(getting_started ${OpenCV_LIBRARIES})
