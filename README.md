@@ -15,7 +15,8 @@
 <div align="center">
   <a href="#installation"><b>Installation</b></a> |
   <a href="examples/getting_started.cpp"><b>Getting Started</b></a> |
-  <a href="#examples"><b>Examples</b></a>
+  <a href="#examples"><b>Examples</b></a> |
+  <a href="https://github.com/wkentaro/imgviz"><b>Python Version</b></a>
 </div>
 
 <br/>
