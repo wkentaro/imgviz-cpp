@@ -22,7 +22,7 @@
 <br/>
 
 <div align="center">
-  <img src=".readme/getting_started.png" height="100px">
+  <img src=".readme/getting_started.png" width="75%">
 </div>
 
 ## Installation
@@ -66,7 +66,7 @@ make -j
         <code>examples/label_to_bgr.cpp</code>
       </a>
     </td>
-    <td><img src=".readme/label_to_bgr.png" height="150px"></td>
+    <td><img src=".readme/label_to_bgr.png" width="66%"></td>
   </tr>
   <tr>
     <td>
@@ -74,7 +74,7 @@ make -j
         <code>examples/depth_to_bgr.cpp</code>
       </a>
     </td>
-    <td><img src=".readme/depth_to_bgr.png" height="150px"></td>
+    <td><img src=".readme/depth_to_bgr.png" width="100%"></td>
   </tr>
   <tr>
     <td>
@@ -82,7 +82,7 @@ make -j
         <code>examples/tile.cpp</code>
       </a>
     </td>
-    <td><img src=".readme/tile.png" height="150px"></td>
+    <td><img src=".readme/tile.png" width="66%"></td>
   </tr>
   <tr>
     <td>
@@ -90,6 +90,6 @@ make -j
         <code>examples/centerize.cpp</code>
       </a>
     </td>
-    <td><img src=".readme/centerize.png" height="150px"></td>
+    <td><img src=".readme/centerize.png" width="66%"></td>
   </tr>
 </table>
