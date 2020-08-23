@@ -1,3 +1,6 @@
+#ifndef IMGVIZ_IMGVIZ_H_
+#define IMGVIZ_IMGVIZ_H_
+
 #include <cmath>
 
 #include <opencv2/opencv.hpp>
@@ -194,7 +197,7 @@ cv::Mat textInRectangle(const cv::Mat src, const std::string text,
                         const std::string loc = "lt+",
                         const int font_face = cv::FONT_HERSHEY_SIMPLEX,
                         const double font_scale = 1, const int thickness = 2) {
-  assert(loc == "lt+");  // TODO(wkentaro): support other loc
+  assert(loc == "lt+"); // TODO(wkentaro): support other loc
 
   cv::Mat dst = src.clone();
   if (dst.type() == CV_8UC1) {
@@ -267,3 +270,5 @@ cv::Mat labelToBgr(const cv::Mat label, const cv::Mat bgr,
 }
 
 } // namespace imgviz
+
+#endif /* IMGVIZ_IMGVIZ_H_ */
